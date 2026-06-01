@@ -6,6 +6,7 @@ import streamlit as st
 import os
 # from snowflake.snowpark.context import get_active_session - removed here in github
 from snowflake.snowpark.functions import col
+import requests  
 
 # session  = get_active_session()   -- removed here in github, replaced with next 2 lines
 cnx = st.connection("snowflake")
@@ -36,6 +37,9 @@ if ingredients_list:
     
     for fruit_chosen in ingredients_list: 
         ingredients_string += fruit_chosen + ' '
+        smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
+        # st.text(smoothiefroot_response.json())
+        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     # st.write(ingredients_string)
 
@@ -53,9 +57,7 @@ if ingredients_list:
 
 # this allows streamlit to 
 #  The requests library allows us to build and sent REST API calls.  Paste the code below into the bottom of your SniS app.
-import requests  
-smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
-# st.text(smoothiefroot_response.json())
-sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+
+
         
 
