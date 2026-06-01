@@ -1,6 +1,7 @@
 # requirements.txt - according to the course, do this: 
 snowflake-snowpark-python 
 streamlit
+requests
 
 # definition_version: 2
 # entities:
