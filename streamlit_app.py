@@ -54,10 +54,11 @@ if ingredients_list:
         st.write('The serach value for ', fruit_chosen, ' is ', search_on, '.') 
       
         st.subheader(fruit_chosen + 'Nutrition Information') 
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)  
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/{SEARCH_ON}")  
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
-   # smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
+# was  smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)  
+  # smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
     # st.write(ingredients_string)
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
