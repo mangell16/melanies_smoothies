@@ -6,7 +6,9 @@ import streamlit as st
 import os
 # from snowflake.snowpark.context import get_active_session - removed here in github
 from snowflake.snowpark.functions import col
-import requests  
+import requests 
+# this allows streamlit to 
+#  The requests library allows us to build and sent REST API calls.  Paste the code below into the bottom of your SniS app.
 import pandas
 
 # session  = get_active_session()   -- removed here in github, replaced with next 2 lines
@@ -21,7 +23,9 @@ st.write(
   """
 )
 
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('Fruit_name'),col('SEARCH_ON'))
+
+
+my_dataframe = session.table('smoothies.public.fruit_options').select(col('Fruit_name'),col('SEARCH_ON'))
 # st.dataframe(data=my_dataframe, use_container_width=True)
 # st.stop
 
@@ -59,7 +63,7 @@ if ingredients_list:
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
                     values ('""" + ingredients_string + """', '"""+name_on_order+ """')"""
 
-    st.write(my_insert_stmt)
+    # st.write(my_insert_stmt)
     # st.stop()
     time_to_insert = st.button('Submit my Order')
 
@@ -68,8 +72,7 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered!', icon="✅") 
 
-# this allows streamlit to 
-#  The requests library allows us to build and sent REST API calls.  Paste the code below into the bottom of your SniS app.
+
 
 
         
