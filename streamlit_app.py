@@ -21,11 +21,16 @@ st.write(
 )
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('Fruit_name'),col('SEARCH_ON'))
-st.dataframe(data=my_dataframe, use_container_width=True)
-st.stop
+# st.dataframe(data=my_dataframe, use_container_width=True)
+# st.stop
 
 name_on_order = st.text_input('Name on Smoothie Order: ') 
 st.write('The name on your order will be: ', name_on_order)
+
+# Convert the snowpark dataframe to a Pandas so we can use the LOC function
+pd_df = my_dataframe.to_pandas()
+st.dataframe(pd_df) 
+st.stop()
 
 # The ingredients variable is an object (data type) called a LIST. 
 # A LIST is different from a DATAFRAME, which is also different from a STRING.
@@ -39,6 +44,10 @@ if ingredients_list:
           # st.text(smoothiefroot_response.json())
     for fruit_chosen in ingredients_list: 
         ingredients_string += fruit_chosen + ' '
+
+        search_on=pd_df.loc[pd_df['Fruit_name'] == fruit_chosen , 'SEARCH_ON'].iloc(0)
+        st.write('The serach value for ', fruit_Chosen, ' is ', search_on, '.') 
+      
         st.subheader(fruit_chosen + 'Nutrition Information') 
         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)  
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
