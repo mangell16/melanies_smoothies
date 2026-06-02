@@ -30,8 +30,8 @@ st.write('The name on your order will be: ', name_on_order)
 
 # Convert the snowpark dataframe to a Pandas so we can use the LOC function
 pd_df = my_dataframe.to_pandas()
-st.dataframe(pd_df) 
-st.stop()
+# st.dataframe(pd_df) 
+# st.stop()
 
 # The ingredients variable is an object (data type) called a LIST. 
 # A LIST is different from a DATAFRAME, which is also different from a STRING.
