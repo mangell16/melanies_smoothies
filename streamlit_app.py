@@ -7,6 +7,7 @@ import os
 # from snowflake.snowpark.context import get_active_session - removed here in github
 from snowflake.snowpark.functions import col
 import requests  
+import pandas
 
 # session  = get_active_session()   -- removed here in github, replaced with next 2 lines
 cnx = st.connection("snowflake")
